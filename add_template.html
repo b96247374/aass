@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>إضافة قالب تقرير جديد</h2>
+<form method="post">
+  <div class="mb-3">
+    <label for="name" class="form-label">اسم القالب</label>
+    <input type="text" class="form-control" id="name" name="name" required>
+  </div>
+  <div class="mb-3">
+    <label for="content" class="form-label">محتوى القالب</label>
+    <textarea class="form-control" id="content" name="content" rows="10" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-success">حفظ</button>
+  <a href="{{ url_for('manage_templates') }}" class="btn btn-secondary">إلغاء</a>
+</form>
+
+<!-- استخدم jsdelivr بدلاً من tiny.cloud -->
+<script src="https://cdn.jsdelivr.net/npm/tinymce@6.8.3/tinymce.min.js"></script>
+<script>
+tinymce.init({
+  selector: '#content',
+  directionality: 'rtl',
+  height: 400,
+  plugins: 'lists table image link code',
+  toolbar: 'undo redo | styles | bold italic underline | alignright aligncenter alignleft alignjustify | bullist numlist | table | image link | code',
+  content_style: `body { font-family: 'GE SS Unique', 'GESSTwo Light', Arial, sans-serif; }`,
+  font_formats: 'GE SS Unique=GE SS Unique;GESSTwo Light=GESSTwo Light;Arial=Arial;Tahoma=Tahoma;'
+});
+</script>
+<!-- خطوط عربية -->
+<style>
+@font-face {
+  font-family: 'GE SS Unique';
+  src: url('{{ url_for('static', filename='css/GE_SS_Unique.ttf') }}');
+}
+@font-face {
+  font-family: 'GESSTwo Light';
+  src: url('{{ url_for('static', filename='css/GESSTwo_Light.ttf') }}');
+}
+</style>
+{% endblock %} 
